@@ -63,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<UserCredential> signInWithGoogle() async {
     // Create a new provider
+    debugPrint("Signing in with google: $GoogleAuthProvider");
     GoogleAuthProvider googleProvider = GoogleAuthProvider();
 
     googleProvider
@@ -91,8 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
-    final t = signInWithGoogle();
-    print(t);
+    final t = signInWithGoogle().then((value) {
+      debugPrint(
+          "Signed in with google: $value, user: ${value.user}, ${value.user?.displayName}, ${value.user?.phoneNumber}");
+    });
   }
 
   @override
